@@ -1,14 +1,18 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Location } from '../classes/location/location.class';
+import { LocationService } from '../services/location/location.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent{
+export class MainComponent implements OnInit {
 
-  latitude = -27.2015;
-  longitude = 152.9655;
+  latitude = 0;
+  longitude = 0;
   googleMapType = 'terrain';
   markers: marker[] = [
       {
@@ -31,12 +35,19 @@ export class MainComponent{
       }
   ];
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
+
+  ngOnInit(): void {
+    this.locationService.getCurrentLocation()
+    .then((loc) => {
+        console.log(`Initial location ${loc}`);
+        this.latitude = loc.latitude;
+        this.longitude = loc.longitude;
+    });
+  }
 
   // tslint:disable-next-line:typedef
   addMarker($event: { coords: { lat: any; lng: any; }; }) {
-//    console.log($event.coords.lat);
-//    console.log($event.coords.lng);
     const newMarker: marker = {
       lat: $event.coords.lat,
       lng: $event.coords.lng,
