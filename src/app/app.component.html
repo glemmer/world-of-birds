@@ -1,13 +1,18 @@
-<div class="jumbotron jumbotron-fluid bg-info" style="margin-bottom:0">
-  <div class="container text-center text-white">
-    <h1>{{title}}</h1>
+<div class="container-fluid" style="height:100px">
+  <div class="row h-100 bg-info">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <h1 class="text-light">World of Birds</h1>
+    </div>
   </div>
 </div>
+<!--div class="container-fluid w-30 h-20 m-0 p-0">  
+  <img src="https://cdn.pixabay.com/photo/2017/09/13/19/43/nature-2746726__340.jpg" class="img-fluid w-30 h-20 p-0 m-0" alt="Patience">           
+</div -->
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="#" routerLink="/main">WOB</a>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto" *ngIf="getLoggedIn() === true">
       <li class="nav-item">
         <a class="nav-link" href="#" routerLink="/locations">Locations</a>
       </li>
@@ -17,6 +22,16 @@
       <li class="nav-item">
         <a class="nav-link" href="#" routerLink="/users">Users</a>
       </li>    
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="getLoggedIn() === false">
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/login">Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="getLoggedIn() === true">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Welcome, {{user.firstname}}</a>
+      </li>
     </ul>
   </div>  
 </nav>

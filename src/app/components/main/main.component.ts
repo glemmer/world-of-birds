@@ -1,8 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Location } from '../classes/location/location.class';
-import { LocationService } from '../services/location/location.service';
+import { LoginService } from 'src/app/services/login/login.service';
+import { LocationService } from '../../services/location/location.service';
 
 @Component({
   selector: 'app-main',
@@ -35,14 +34,18 @@ export class MainComponent implements OnInit {
       }
   ];
 
-  constructor(private locationService: LocationService) { }
+  constructor(private locationService: LocationService, private loginService: LoginService) { 
+    this.loginService.setLoggedIn(false);
+  }
 
   ngOnInit(): void {
     this.locationService.getCurrentLocation()
     .then((loc) => {
-        console.log(`Initial location ${loc}`);
         this.latitude = loc.latitude;
         this.longitude = loc.longitude;
+    })
+    .catch((err) => {
+      console.log(`Error getting current position : ${err}`);
     });
   }
 
