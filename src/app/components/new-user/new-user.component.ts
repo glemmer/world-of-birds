@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
-import { LoginService } from 'src/app/services/login/login.service';
+import { MessageService } from 'src/app/services/message/message.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class NewUserComponent implements OnInit {
 
   constructor(private router: Router,
               private userService: UserService,
-              private loginService: LoginService) { }
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +28,7 @@ export class NewUserComponent implements OnInit {
 
   }
 
-  populateNewUser(): void {
+  populateNewUser(): User {
     const newUser: User = this.userService.getNewUser();
     if (this.password !== this.confirmpwd) {
        this.passwordMatchError();
@@ -37,19 +37,24 @@ export class NewUserComponent implements OnInit {
     newUser.email = this.email;
     newUser.firstname = this.firstname;
     newUser.lastname = this.lastname;
-//    newUser.password = this.password;
-    console.log(`New user information ${newUser}`);
-    this.userService.setCurrentUser(newUser);
-//    this.newUserRegistered.emit(newUser);
+    newUser.username = this.email;
+    newUser.password = this.password;
+    newUser.roles.push('user');
+    return newUser;
   }
 
   onRegister(): void {
-    console.log('On Register Click');
-    this.loginService.setLoggedIn(true);
-
-    this.populateNewUser();
-
-    this.router.navigateByUrl('/birds');
+    this.userService.enroleUser(this.populateNewUser()).subscribe({
+      next: data => {
+        this.messageService.setMessage(`User ${this.email} registered succesfully`);
+        this.router.navigateByUrl('/login');
+      },
+      error: error => {
+        console.log(`Error message -> ${error.error.message}`);
+        this.messageService.setMessage(error.error.message);
+      }
+    });
   }
+
 
 }

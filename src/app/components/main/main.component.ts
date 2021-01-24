@@ -34,8 +34,7 @@ export class MainComponent implements OnInit {
       }
   ];
 
-  constructor(private locationService: LocationService, private loginService: LoginService) { 
-    this.loginService.setLoggedIn(false);
+  constructor(private locationService: LocationService, private loginService: LoginService) {
   }
 
   ngOnInit(): void {

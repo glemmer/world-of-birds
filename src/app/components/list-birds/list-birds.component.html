@@ -1,0 +1,12 @@
+<div class="row m-3" style="height:750px" *ngIf="listBirds">
+    <div class="col-sm-3 m-3 border" style="height:95%">
+    </div>
+    <div class="col-sm-8 m-3 border" style="height:95%">
+        <app-view-bird></app-view-bird>
+    </div>
+</div>
+<div class="row m-3 justify-content-center" style="height:750px" *ngIf="!listBirds">
+    <div class="col-sm-11 m-3 border" style="height:95%">
+        <app-add-bird></app-add-bird>
+    </div>
+</div>

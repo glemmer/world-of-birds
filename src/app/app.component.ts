@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './interfaces/user.interface';
 import { LoginService } from './services/login/login.service';
+import { MessageService } from './services/message/message.service';
 import { UserService } from './services/user/user.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,17 +12,24 @@ import { UserService } from './services/user/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loggedIn: boolean;
+  loggedIn = false;
   user: User;
+  message: string;
 
   title = 'World Of Birds';
 
-  constructor(private loginService: LoginService,
-              private userService: UserService) {
-    this.getLoggedIn();
+  constructor(private router: Router,
+              private loginService: LoginService,
+              private userService: UserService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
+    this.getCurrentMessage();
+  }
+
+  onLogout(): void {
+    this.loginService.setLoggedIn(false);
   }
 
   getLoggedIn(): boolean {
@@ -27,9 +37,6 @@ export class AppComponent implements OnInit {
       this.loggedIn = loggedIn;
       if (loggedIn) {
         this.getCurrentUser();
-        console.log(`Current logged in user ${JSON.stringify(this.user)}`);
-      } else {
-        console.log('No current user set');
       }
     });
 
@@ -40,5 +47,13 @@ export class AppComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(currentUser => {
       this.user = currentUser;
     });
+  }
+
+  getCurrentMessage(): string {
+    this.messageService.getMessage().subscribe(message => {
+      this.message = message;
+    });
+
+    return this.message;
   }
 }

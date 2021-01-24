@@ -23,14 +23,17 @@
         <a class="nav-link" href="#" routerLink="/users">Users</a>
       </li>    
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="getLoggedIn() === false">
+    <ul class="navbar-nav ml-auto" *ngIf="!getLoggedIn()">
       <li class="nav-item">
         <a class="nav-link" href="#" routerLink="/login">Login</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="getLoggedIn() === true">
+    <ul class="navbar-nav ml-auto" *ngIf="getLoggedIn()">
       <li class="nav-item">
-        <a class="nav-link" href="#">Welcome, {{user.firstname}}</a>
+        <a class="nav-link" href="#">Welcome, {{user.firstname}} {{user.lastname}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>  
@@ -38,5 +41,12 @@
 
 <router-outlet></router-outlet>
 
-<footer class="bg-info">
+<footer>
+  <div class="container-fluid">
+    <div class="row bg-info">
+      <div class="col-12">
+        <span class="text-white">{{getCurrentMessage()}}</span>
+      </div>
+    </div>
+  </div>
 </footer>
