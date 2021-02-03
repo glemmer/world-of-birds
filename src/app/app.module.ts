@@ -36,8 +36,7 @@ import { ViewBirdComponent } from './components/view-bird/view-bird.component';
     FormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-//      apiKey: 'XXXXXXX'
-      apiKey: 'AIzaSyD-LM717FiPawYbwuPowR8KoyEDT3LkWSQ'
+      apiKey: 'XXXXXXX'
 }),
     RouterModule.forRoot([
       {path: '', redirectTo: '/', pathMatch: 'full'},
