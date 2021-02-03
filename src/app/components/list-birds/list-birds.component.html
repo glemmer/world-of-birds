@@ -1,12 +1,18 @@
-<div class="row m-3" style="height:750px" *ngIf="listBirds">
+<div class="row m-3" style="height:750px">
     <div class="col-sm-3 m-3 border" style="height:95%">
+        <div class="m-1">
+            <span class="font-weight-bold">List of all birds</span>
+        </div>
+        <div class="p-2" *ngFor="let b of birds; let i = index">
+              <a href="#link" (click)="onBirdClick(i)">{{b.name}}</a>  
+        </div>
     </div>
-    <div class="col-sm-8 m-3 border" style="height:95%">
+    <div class="col-sm-8 m-3 border container" style="height:95%">
         <app-view-bird></app-view-bird>
-    </div>
-</div>
-<div class="row m-3 justify-content-center" style="height:750px" *ngIf="!listBirds">
-    <div class="col-sm-11 m-3 border" style="height:95%">
-        <app-add-bird></app-add-bird>
+        <div class="row align-items-end" style="height:65%" *ngIf="listBirds">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary m-1 float-right" (click)="onBackClick()">Back</button>
+            </div>
+        </div>
     </div>
 </div>

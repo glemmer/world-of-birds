@@ -1,1 +1,6 @@
-<p>view-bird works!</p>
+<div *ngIf="!getAddBird()">
+    <p>view-bird works!</p>
+</div>
+<div *ngIf="getAddBird()">
+    <app-add-bird></app-add-bird>
+</div>

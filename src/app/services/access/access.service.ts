@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AccessService {
     this.accessToken = token;
   }
 
-  getAccessToken(): string {
-    return this.accessToken;
+  getAccessToken(): Observable<string> {
+    return of(this.accessToken);
   }
 }

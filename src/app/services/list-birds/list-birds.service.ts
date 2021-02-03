@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ListBirdsService {
 
-  private listBirds = true;
+  listBirds = true;
 
   constructor() { }
 

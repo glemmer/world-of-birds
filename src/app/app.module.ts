@@ -57,6 +57,6 @@ import { ViewBirdComponent } from './components/view-bird/view-bird.component';
 export class AppModule {
 
   constructor(router: Router) {
-    router.navigateByUrl('/birds');
+    router.navigateByUrl('/login');
   }
 }

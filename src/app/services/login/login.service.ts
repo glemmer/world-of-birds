@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 export class LoginService {
 
   loggedIn = false;
+  private accessToken: string;
 
   constructor() { }
 
@@ -18,5 +19,4 @@ export class LoginService {
     this.loggedIn = loggedIn;
     console.log(`LoggedIn set to ${this.loggedIn}`);
   }
-
 }

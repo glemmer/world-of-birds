@@ -3,8 +3,8 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginService } from '../login/login.service';
 import { MessageService } from '../message/message.service';
+import { AccessService } from '../access/access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class UserService {
   };
 
   constructor(private http: HttpClient,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private accessService: AccessService) { }
 
   getNewUser(): User {
     const roles = new Array<string>();
@@ -45,6 +46,7 @@ export class UserService {
                   this.currentUser.lastname = data.lastname;
                   this.currentUser.email = data.email;
                   this.currentUser.username = data.username;
+                  this.accessService.setAccessToken(data.accessToken);
                   console.log(`User logged in -> ${JSON.stringify(data)}`);
                 },
                   error => this.messageService.setMessage(`Error: ${error}`)
