@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Bird } from 'src/app/interfaces/bird.interface';
 import { BirdService } from 'src/app/services/bird/bird.service';
 import { ListBirdsService } from 'src/app/services/list-birds/list-birds.service';

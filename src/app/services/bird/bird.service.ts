@@ -21,7 +21,7 @@ export class BirdService{
           .set('Authorization', `Bearer ${data}`)
           .set('Access-Control-Allow-Origin', '*');
         console.log(`Headers -> ${JSON.stringify(this.headers)}`);
-        this.getAllBirds().subscribe(birds => this.birds = birds);
+        this.getAllBirds().then(birds => this.birds = birds);
       },
       error: error => {
         console.log(`Error message -> ${JSON.stringify(error)}`);
@@ -44,7 +44,7 @@ export class BirdService{
           );
   }
 
-  private getAllBirds(): Observable<Bird[]> {
+/*  private getAllBirds(): Observable<Bird[]> {
     const headers =  this.headers;
     const url = `http://localhost:8110/wob/api/birds`;
     return this.http.get<Bird[]>(url, {headers}).pipe(
@@ -56,7 +56,19 @@ export class BirdService{
         }
       )
     );
+  }  */
+
+  private getAllBirds(): Promise<Bird[]> {
+    return new Promise((resolve, reject) => {
+      const headers =  this.headers;
+      const url = `http://localhost:8110/wob/api/birds`;
+      this.http.get<Bird[]>(url, {headers}).toPromise().then(data => {
+        console.log(`Returned all birds`);
+        resolve(data);
+      });
+    });
   }
+
 
   getBirds(): Observable<Bird[]> {
     return of(this.birds);
