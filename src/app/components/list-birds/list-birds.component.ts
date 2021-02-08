@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { Bird } from 'src/app/interfaces/bird.interface';
 import { BirdService } from 'src/app/services/bird/bird.service';
 import { ListBirdsService } from 'src/app/services/list-birds/list-birds.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-list-birds',
@@ -23,7 +23,6 @@ export class ListBirdsComponent implements OnInit {
     this.listBirdsService.getListBirds().subscribe(listBirds => this.listBirds = listBirds);
     this.birdService.getBirds().subscribe(allBirds => {
       this.birds = allBirds;
-      console.log(`All Birds -> ${this.birds}`);
     });
   }
 
@@ -32,7 +31,8 @@ export class ListBirdsComponent implements OnInit {
   }
 
   onBirdClick(indx: number): void {
-//    this.listBirdsService.setListBirds(false);
+    console.log(`Button ${indx} clicked`);
+    this.listBirdsService.setListBirds(false);
     this.router.navigateByUrl('/list-birds');
   }
 }

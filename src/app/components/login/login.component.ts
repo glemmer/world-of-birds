@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.username, this.password).subscribe({
       next: data => {
         console.log(`User -> ${JSON.stringify(data)}`);
-        this.messageService.setMessage(`User ${this.username} logged in succesfully`);
+        this.messageService.setMessage(`Loading list of birds`);
         this.accessService.setAccessToken(data.accessToken);
         this.loginService.setLoggedIn(true);
         this.router.navigateByUrl('/birds');
@@ -44,16 +44,6 @@ export class LoginComponent implements OnInit {
         }
       }
     });
-
-/*    this.userService.loginUser(this.username, this.password)
-    .then(user => {
-      console.log(`User -> ${JSON.stringify(user)}`);
-      this.loginService.setLoggedIn(true);
-      this.router.navigateByUrl('/birds');
-    })
-    .catch(err => {
-
-    });  */
   }
 
 }
