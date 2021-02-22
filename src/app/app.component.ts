@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from './interfaces/user.interface';
 import { LoginService } from './services/login/login.service';
 import { MessageService } from './services/message/message.service';
@@ -18,8 +17,7 @@ export class AppComponent implements OnInit {
 
   title = 'World Of Birds';
 
-  constructor(private router: Router,
-              private loginService: LoginService,
+  constructor(private loginService: LoginService,
               private userService: UserService,
               private messageService: MessageService) {
   }
@@ -29,6 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   onLogout(): void {
+    console.log(`User ${this.user.firstname} logged out`);
     this.loginService.setLoggedIn(false);
   }
 

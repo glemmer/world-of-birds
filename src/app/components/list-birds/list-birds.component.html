@@ -3,16 +3,15 @@
         <div class="m-1">
             <span class="font-weight-bold">List of all birds</span>
         </div>
-        <div class="p-2" *ngFor="let b of birds; let i = index">
-            <button type="button" class="btn btn-primary m-1" (click)="onBirdClick(i)">{{b.name}}</button>  
+        <div *ngFor="let b of birds; let i = index">
+            <!--button type="button" class="btn btn-primary m-1" (click)="onBirdClick(i)">{{b.name}}</button -->  
+            <a class="nav-link" href="#" (click)="onBirdClick(i)" routerLink="/list-birds/0">{{b.name}}</a>
         </div>
     </div>
-    <div class="col-sm-8 m-3 border container" style="height:95%">
+    <div class="col-sm-8 m-3 border" *ngIf="listBirds === 0 || listBirds === 1" style="height:95%">
         <app-view-bird></app-view-bird>
-        <div class="row align-items-end" style="height:65%" *ngIf="listBirds">
-            <div class="col-sm-12">
-                <button type="button" class="btn btn-primary m-1 float-right" (click)="onBackClick()">Back</button>
-            </div>
-        </div>
+    </div>
+    <div class="col-sm-8 m-3 border" *ngIf="listBirds === 2" style="height:95%">
+        <app-add-bird></app-add-bird>
     </div>
 </div>

@@ -47,7 +47,7 @@ import { ViewBirdComponent } from './components/view-bird/view-bird.component';
       {path: 'login', component: LoginComponent},
       {path: 'logout', component: LogoutComponent},
       {path: 'new-user', component: NewUserComponent},
-      {path: 'list-birds', component: ListBirdsComponent},
+      {path: 'list-birds/:id', component: ListBirdsComponent},
     ])
   ],
   providers: [],

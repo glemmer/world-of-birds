@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Bird } from 'src/app/interfaces/bird.interface';
 import { BirdService } from 'src/app/services/bird/bird.service';
-import { ListBirdsService } from 'src/app/services/list-birds/list-birds.service';
-import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-list-birds',
@@ -12,15 +10,18 @@ import { MessageService } from 'src/app/services/message/message.service';
 })
 export class ListBirdsComponent implements OnInit {
 
-  listBirds: boolean;
+  listBirds: number;
   birds: Bird[];
 
   constructor(private router: Router,
-              private listBirdsService: ListBirdsService,
-              private birdService: BirdService) { }
+              private birdService: BirdService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.listBirdsService.getListBirds().subscribe(listBirds => this.listBirds = listBirds);
+    this.route.params.subscribe(params => {
+        this.listBirds = +params.id;
+        console.log(`${this.listBirds}`);
+    });
     this.birdService.getBirds().subscribe(allBirds => {
       this.birds = allBirds;
     });
@@ -32,7 +33,5 @@ export class ListBirdsComponent implements OnInit {
 
   onBirdClick(indx: number): void {
     console.log(`Button ${indx} clicked`);
-    this.listBirdsService.setListBirds(false);
-    this.router.navigateByUrl('/list-birds');
   }
 }
